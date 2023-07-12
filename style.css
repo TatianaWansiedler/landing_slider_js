@@ -66,7 +66,7 @@ body {
   height: 670px;
 }
 
-#id-slider {
+#id-slider-1 {
   width: 100%;
 }
 .slider {
@@ -120,13 +120,15 @@ body {
   gap: 30px;
 }
 .slider_controls_item {
-  display: block;
-  width: 10px;
-  height: 10px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: rgba(187, 187, 187, 0.286);
 }
-.item-activ {
+.item-active {
   background: var(--white);
 }
 .slider_left_btn,
@@ -326,6 +328,8 @@ body {
   color: var(--white);
   font-weight: 300;
   line-height: 138%;
+  font-size: 18px;
+  width: 75%;
 }
 .contacts_links {
   display: flex;
@@ -479,18 +483,89 @@ body {
   cursor: pointer;
 }
 
-/* screen 800px */
+/* screen 1200px */
 
 @media (max-width: 1200px) {
-:root {
-  --main-width: 900px;
-}
-
-}
-
-@media (max-width: 800px) {
+  :root {
+    --main-width: 900px;
+  }
   .menu{
-    display: none;
+    gap: 40px;
+  }
+  .title_services {
+    padding: 155px 0 40px 0;
+  }
+}
+/* screen < 950px */
+@media (max-width: 950px) {
+  :root {
+    --main-width: 590px;
+  }
+  /* first-screen && slider */
+  .slider {
+    height: 400px;
+  }
+  .title_services {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* about_us */
+
+  .about_us_blok {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .about_wrapper {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .about_us_item {
+    height: 140px;
+    padding: 33px;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+  /* contacts */
+
+  .flex_form {
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    gap: 160px;
+  }
+  .contacts_text {
+    width: 100%;
+  }
+  .contacts_links,
+  .inputs {
+    justify-content: space-between;
+  }
+
+  /* burger-menu */
+  .menu {
+    padding-top: 100px;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    left:0;
+    bottom:0;
+    top: 118px;
+    pointer-events: none;
+    text-align: center;
+    flex-direction: column;
+    transform: translateY(-100%);
+    transition: transform, opacity;
+    transition-duration: 0.5s;
+    background: var(--white);
+    z-index:100;
+  }
+  .showMenu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    
   }
   .burger {
     display: block;

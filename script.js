@@ -1,10 +1,17 @@
-// SLIDER
+// SLIDER - 1
 const slider = document.querySelector('.slider')
 const wrapper = document.querySelector('.wrapper')
 const right_btn = document.querySelector('.slider_right_btn')
 const left_btn = document.querySelector('.slider_left_btn')
+
 let slider_index = 0
 let slider_width = 1110
+
+if (window.innerWidth <= 1200 && window.innerWidth > 950) {
+    slider_width = 900
+} else if (window.innerWidth <= 950) {
+    slider_width = 590
+}
 
 const data = [
     { id: 1, title: 'Бухгалтерские услуги в вашем городе', text_btn: 'Наша презентация' },
@@ -12,6 +19,8 @@ const data = [
     { id: 3, title: 'Расcчитать стоимость бухгалтерских услуг', text_btn: 'Заказать услуги' },
     { id: 4, title: 'Почему клиенты выбирают именно Нас', text_btn: 'Перейти к отзывам' },
 ]
+
+// -- create elem of slider
 
 for (const elem of data) {
     const slide = document.createElement('div')
@@ -31,64 +40,82 @@ for (const elem of data) {
 
 slider.append(wrapper)
 
+// -----------create controls buttons----------------
+let slider_btns = document.querySelector('.slider_controls')
+
+for (const index in data) {
+    const button = document.createElement('button')
+    button.className = 'slider_controls_item'
+
+    if (+index === slider_index) {
+        button.classList.add('item-active')
+    }
+
+    button.onclick = () => {
+        slider_index = +index
+        move_slider('click', button)
+    }
+
+    slider_btns.append(button)
+}
+
+function move_slider(side, button) {
+
+    const all_btns = document.querySelectorAll('.slider_controls_item')
+
+    if (side === 'left') {
+        if (slider_index !== 0) {
+            slider_index--
+            all_btns[slider_index + 1].classList.remove('item-active')
+        } else {
+            slider_index = data.length - 1
+            all_btns[0].classList.remove('item-active')
+        }
+        all_btns[slider_index].classList.add('item-active')
+
+    } else if (side === 'right') {
+        if (slider_index < data.length - 1) {
+            slider_index++
+            all_btns[slider_index - 1].classList.remove('item-active')
+        } else {
+            slider_index = 0
+            all_btns[all_btns.length - 1].classList.remove('item-active')
+        }
+        all_btns[slider_index].classList.add('item-active')
+
+    } else if (side === 'click') {
+        all_btns.forEach(elem => elem.classList.remove('item-active'))
+        button.classList.add('item-active')
+    }
+
+    wrapper.style.left = `${slider_index * -slider_width}px`
+}
 
 function go_right() {
-    const control_next = document.querySelector(`#control-${slider_index + 1}`)
-    const control_prev = document.querySelector(`#control-${slider_index}`)
-    if (control_next) {
-        control_next.classList.add(`item-activ`);
-    }
-
-    if (control_prev) {
-        control_prev.classList.remove(`item-activ`);
-    }
-    if (slider_index < data.length - 1) {
-        slider_index++
-        wrapper.style.left = `${slider_index * -slider_width}px`
-
-    } else {
-        slider_index = 0
-        wrapper.style.left = `${slider_index * -slider_width}px`
-
-        const control_last = document.querySelector(`#control-${data.length - 1}`);
-        const control_first = document.querySelector(`#control-${slider_index}`);
-        if (control_last) {
-            control_last.classList.remove(`item-activ`);
-            control_first.classList.add(`item-activ`);
-        }
-    }
+    move_slider('right')
 }
 function go_left() {
-    const control_next = document.querySelector(`#control-${slider_index}`)
-    const control_prev = document.querySelector(`#control-${slider_index - 1}`)
-    if (control_next) {
-        control_next.classList.remove(`item-activ`);
-    }
-
-    if (control_prev) {
-        control_prev.classList.add(`item-activ`);
-    }
-
-    if (slider_index != 0) {
-        slider_index--
-        wrapper.style.left = `${slider_index * -slider_width}px`
-    } else {
-        slider_index = data.length - 1
-        wrapper.style.left = `${slider_index * -slider_width}px`
-
-        const control_last = document.querySelector(`#control-${slider_index}`);
-        const control_first = document.querySelector(`#control-0`);
-        if (control_last) {
-            control_last.classList.add(`item-activ`);
-            control_first.classList.remove(`item-activ`);
-        }
-    }
+    move_slider('left')
 }
 
 right_btn.addEventListener('click', go_right)
 left_btn.addEventListener('click', go_left)
 
 
-// BURGER MENU
+// MENU 
 
-// let state = false;
+const menu = document.querySelector(".menu");
+const burger = document.querySelector(".burger");
+const burger_span = document.querySelector(".burger span");
+
+function toggleMenu() {
+    if (menu.classList.contains("showMenu")) {
+        menu.classList.remove("showMenu");
+        burger_span.classList.remove('active')
+    } else {
+        menu.classList.add("showMenu");
+        burger_span.classList.add('active')
+    }
+}
+
+burger.addEventListener("click", toggleMenu);
