@@ -66,9 +66,6 @@ body {
   height: 670px;
 }
 
-#id-slider-1 {
-  width: 100%;
-}
 .slider {
   width: var(--main-width);
   height: 450px;
@@ -119,7 +116,8 @@ body {
   flex-direction: row;
   gap: 30px;
 }
-.slider_controls_item {
+.slider_controls_item,
+.slider_controls_item-blue {
   cursor: pointer;
   border: none;
   outline: none;
@@ -132,7 +130,8 @@ body {
   background: var(--white);
 }
 .slider_left_btn,
-.slider_right_btn {
+.slider_right_btn,
+.slider_btn-blue {
   width: 60px;
   height: 60px;
   background: rgba(238, 238, 238, 0.142);
@@ -140,7 +139,8 @@ body {
   outline: none;
   cursor: pointer;
 }
-.slider_btns > button:hover {
+.slider_left_btn:hover,
+.slider_right_btn:hover  {
   background: rgba(238, 238, 238, 0.368);
   transition: all 0.3s;
 }
@@ -246,32 +246,40 @@ body {
   background: var(--lightgray-bckg);
   padding: 100px 0 100px 0;
 }
+/* slider */
 .clients {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-.clients_img {
-  width: 255px;
+  width: var(--main-width);
+  position: relative;
+  overflow: hidden;
   height: 130px;
 }
-.slider_controls_item-blue {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+.wrapper_clients {
+  display: flex;
+  position: absolute;
+  left: 0;
+  transition: all 0.7s;
+}
+.client {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  width: var(--main-width);
+}
+
+.clients_img {
+  width: calc(var(--main-width) / 4 - 30px);
+  height: 130px;
+}
+.slider_controls_item-blue,
+.slider_btn-blue  {
   background: #005fa35f;
 }
-.item-active-blue,
-.btn_blue_active {
+.item-active-blue {
   background: var(--accent);
 }
-.btn_blue {
+.slider_btn-blue:hover{
   background: var(--accent);
-  opacity: 0.2;
+  transition: all 0.3s;
 }
 /* reviews */
 .reviews_blok {
@@ -500,9 +508,19 @@ body {
   .title_services {
     padding: 155px 0 40px 0;
   }
+  /* about_us */
+
+  .about_us_blok {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .about_wrapper {
+    max-width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
 }
 /* screen < 950px */
-@media (max-width: 950px) {
+@media (max-width: 900px) {
   :root {
     --main-width: 590px;
   }
@@ -517,12 +535,7 @@ body {
 
   /* about_us */
 
-  .about_us_blok {
-    flex-direction: column;
-    gap: 40px;
-  }
   .about_wrapper {
-    max-width: 100%;
     display: flex;
     flex-direction: column;
   }
@@ -532,6 +545,18 @@ body {
     flex-direction: row;
     align-items: flex-end;
   }
+
+  /* slider 2 */
+  .clients {
+    height: 200px;
+  }
+  .client {
+    background-image: url(./images/mob_microsoft.png);
+    background-repeat: no-repeat;
+    width: var(--main-width);
+    height: 200px;
+  }
+
   /* contacts */
 
   .flex_form {
