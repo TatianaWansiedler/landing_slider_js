@@ -1,3 +1,5 @@
+// в работе еще 2 слайдера !!!!!!!!
+
 // SLIDER - 1
 const slider = document.querySelector('.slider')
 const wrapper = document.querySelector('.wrapper')
@@ -41,7 +43,7 @@ for (const elem of data) {
 slider.append(wrapper)
 
 // -----------create controls buttons----------------
-let slider_btns = document.querySelector('.slider_controls')
+let slider_btns = document.querySelector('#controls_1')
 
 for (const index in data) {
     const button = document.createElement('button')
