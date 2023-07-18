@@ -1,6 +1,8 @@
 // оптимизация функций еще не реализована, 
 // при изменении размера экрана необходимо обновить страницу для корректной работы слайдеров
 
+//GH Pages -https://tatianawansiedler.github.io/landing_slider_js/
+
 // screen sizes
 let slider_width = 1110
 
